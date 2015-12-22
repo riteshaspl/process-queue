@@ -36,6 +36,10 @@ class ProcessFactory
      */
     public function make($cwd = null)
     {
+        if (!is_null($cwd) && !is_dir($cwd)) {
+            throw new Exception\InvalidWorkingDirectoryException($cwd);
+        }
+
         return new Process($this->cmd, $cwd);
     }
 }

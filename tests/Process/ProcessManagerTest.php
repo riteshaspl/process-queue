@@ -38,6 +38,8 @@ class ProcessManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->factory = new ProcessFactory('pwd');
         $this->directory = \Mockery::mock(\SplFileInfo::class);
+
+        $this->directory->shouldReceive('__toString')->andReturn('/tmp');
     }
 
     public function testConstruct()

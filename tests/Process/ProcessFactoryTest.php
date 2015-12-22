@@ -29,6 +29,8 @@ class ProcessFactoryTest extends \PHPUnit_Framework_TestCase
 
         /** @var \SplFileInfo|\Mockery\MockInterface $fileinfo */
         $fileinfo = \Mockery::mock(\SplFileInfo::class);
+        $fileinfo->shouldReceive('__toString')->andReturn('/tmp');
+
         $process = $factory->make($fileinfo);
 
         $this->assertInstanceOf(Process::class, $process);
@@ -36,5 +38,13 @@ class ProcessFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($fileinfo, $process->getWorkingDirectory());
         $this->assertFalse($process->isStarted());
         $this->assertFalse($process->isRunning());
+    }
+
+    /** @expectedException \Epfremme\ProcessQueue\Process\Exception\InvalidWorkingDirectoryException */
+    public function testMakeException()
+    {
+        $factory = new ProcessFactory('pwd');
+
+        $factory->make('/invalid/directory');
     }
 }
