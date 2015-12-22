@@ -31,11 +31,11 @@ class ProcessFactory
     }
 
     /**
-     * @param \SplFileInfo $directory
+     * @param \SplFileInfo|string $cwd
      * @return Process
      */
-    public function make(\SplFileInfo $directory = null)
+    public function make($cwd = null)
     {
-        return new Process($this->cmd, $directory);
+        return new Process($this->cmd, $cwd);
     }
 }
