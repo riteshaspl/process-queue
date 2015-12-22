@@ -48,6 +48,14 @@ class ProcessManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeInstanceOf(ProcessQueue::class, 'queue', $processManager);
     }
 
+    public function testConstructWithLimit()
+    {
+        $processManager = new ProcessManager($this->factory, 4);
+        $expectedQueue = new ProcessQueue(4);
+
+        $this->assertAttributeEquals($expectedQueue, 'queue', $processManager);
+    }
+
     public function testEnqueue()
     {
         $processManager = new ProcessManager($this->factory);

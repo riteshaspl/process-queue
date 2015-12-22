@@ -31,10 +31,11 @@ class ProcessManager
      * ProcessFactory constructor
      *
      * @param ProcessFactory $factory
+     * @param null $limit
      */
-    public function __construct(ProcessFactory $factory)
+    public function __construct(ProcessFactory $factory, $limit = null)
     {
-        $this->queue = new ProcessQueue();
+        $this->queue = new ProcessQueue($limit);
 
         $this->factory = $factory;
     }
