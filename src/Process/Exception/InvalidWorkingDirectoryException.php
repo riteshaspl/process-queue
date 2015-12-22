@@ -16,7 +16,7 @@ class InvalidWorkingDirectoryException extends \InvalidArgumentException
     /**
      * InvalidWorkingDirectoryException constructor
      *
-     * @param string $directory
+     * @param string|\SplFileInfo $directory
      */
     public function __construct($directory)
     {
