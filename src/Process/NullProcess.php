@@ -26,7 +26,7 @@ class NullProcess extends Process
     /**
      * {@inheritdoc}
      */
-    public function start(callable $callback = null)
+    public function start($callback = null)
     {
         // do nothing
     }
@@ -42,7 +42,7 @@ class NullProcess extends Process
     /**
      * {@inheritdoc}
      */
-    public function wait(callable $callback = null)
+    public function wait($callback = null)
     {
         return 0;
     }
