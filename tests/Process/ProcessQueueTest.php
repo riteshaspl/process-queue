@@ -135,7 +135,7 @@ class ProcessQueueTest extends \PHPUnit_Framework_TestCase
         $process = new Process('pwd');
 
         $queue->add($process);
-        $process->run();
+        $process->start();
         $queue->resolve($process);
 
         $this->assertEmpty($queue);
@@ -158,7 +158,7 @@ class ProcessQueueTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($isResolved);
 
         $queue->add($process);
-        $process->run();
+        $process->start();
         $queue->resolve($process);
 
         $this->assertEmpty($queue);
