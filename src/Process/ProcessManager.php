@@ -50,10 +50,13 @@ class ProcessManager
 
         /** @var Promise $promise */
         $promise = new Promise(function() use ($process, &$promise) {
-            $process->wait();
-            $process->getExitCode() > 0
-                ? $promise->reject($process)
-                : $promise->resolve($process);
+            if ($process->isStarted()) {
+                $process->wait();
+            }
+
+            $process->isSuccessful()
+                ? $promise->resolve($process)
+                : $promise->reject($process);
         });
 
         $this->queue->add($process);

@@ -103,7 +103,6 @@ class ProcessQueue implements \Countable
     private function clearCompleted()
     {
         $this->getCompleted()->each(function(Process $process) {
-            $process->wait();
             $this->resolve($process);
         });
     }
