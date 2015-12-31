@@ -38,11 +38,17 @@ class ProcessQueue implements \Countable
      */
     public function __construct($limit = null)
     {
-        if (!is_null($limit) && !is_int($limit)) {
-            throw new \InvalidArgumentException(sprintf('Limit must be of type int %s given', gettype($limit)));
+        $limit = !is_null($limit) ? $limit : (new ProcessorCounter())->getCpuCount();
+
+        if (!is_numeric($limit)) {
+            throw new \InvalidArgumentException(sprintf('Limit must be numeric, type "%s" given', gettype($limit)));
         }
 
-        $this->limit = $limit ?: (new ProcessorCounter())->getCpuCount();
+        if ($limit < 1) {
+            throw new \InvalidArgumentException('Process limit must be greater than 0');
+        }
+
+        $this->limit = (int) $limit;
         $this->queue = new Collection();
     }
 

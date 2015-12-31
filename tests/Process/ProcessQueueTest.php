@@ -55,10 +55,24 @@ class ProcessQueueTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(4, 'limit', $queue);
     }
 
+    public function testConstructWithNumericString()
+    {
+        $queue = new ProcessQueue('4');
+
+        $this->assertInstanceOf(\Countable::class, $queue);
+        $this->assertAttributeEquals(4, 'limit', $queue);
+    }
+
     /** @expectedException \InvalidArgumentException */
-    public function testConstructException()
+    public function testConstructNonNumericException()
     {
         new ProcessQueue([new \ArrayObject()]);
+    }
+
+    /** @expectedException \InvalidArgumentException */
+    public function testConstructLessThenZeroException()
+    {
+        new ProcessQueue(0);
     }
 
     public function testAdd()
