@@ -34,12 +34,12 @@ class ProcessFactory
      * @param \SplFileInfo|string $cwd
      * @return Process
      */
-    public function make($cwd = null)
+    public function make($cmd = null, $cwd = null)
     {
         if (!is_null($cwd) && !is_dir($cwd)) {
             throw new Exception\InvalidWorkingDirectoryException($cwd);
         }
 
-        return new Process($this->cmd, $cwd);
+        return new Process($cmd !== null ? $cmd : $this->cmd, $cwd);
     }
 }
