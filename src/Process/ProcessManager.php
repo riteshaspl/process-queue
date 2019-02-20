@@ -44,9 +44,9 @@ class ProcessManager
      * @param \SplFileInfo|string $cwd
      * @return PromiseInterface
      */
-    public function enqueue($cwd = null)
+    public function enqueue($cmd = null, $cwd = null)
     {
-        $process = $this->factory->make($cwd);
+        $process = $this->factory->make($cmd, $cwd);
 
         /** @var Promise $promise */
         $promise = new Promise(function() use ($process, &$promise) {
