@@ -44,9 +44,13 @@ class ProcessManager
      * @param \SplFileInfo|string $cwd
      * @return PromiseInterface
      */
-    public function enqueue($cmd = null, $cwd = null)
+    public function enqueue($cmd = null, $cwd = null, $timeout = null)
     {
         $process = $this->factory->make($cmd, $cwd);
+
+        if ($timeout) {
+            $process->setTimeout($timeout);
+        }
 
         /** @var Promise $promise */
         $promise = new Promise(function() use ($process, &$promise) {
